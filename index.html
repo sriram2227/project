@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Automatic and Manual Light Control</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 50px;
+    }
+    #light {
+      width: 150px;
+      height: 150px;
+      margin: 20px auto;
+      background-color: gray;
+      border-radius: 50%;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+      transition: background-color 0.3s;
+    }
+    .on {
+      background-color: yellow;
+      box-shadow: 0 0 60px yellow;
+    }
+    button {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Light Control System</h1>
+
+  <div id="light"></div>
+
+  <div>
+    <button onclick="turnOn()">Turn ON</button>
+    <button onclick="turnOff()">Turn OFF</button>
+  </div>
+
+  <div>
+    <button onclick="startAuto()">Start Auto</button>
+    <button onclick="stopAuto()">Stop Auto</button>
+  </div>
+
+  <script>
+    const light = document.getElementById("light");
+    let autoToggleInterval = null;
+    let isLightOn = false;
+
+    function turnOn() {
+      light.classList.add("on");
+      isLightOn = true;
+    }
+
+    function turnOff() {
+      light.classList.remove("on");
+      isLightOn = false;
+    }
+
+    function toggleLight() {
+      if (isLightOn) {
+        turnOff();
+      } else {
+        turnOn();
+      }
+    }
+
+    function startAuto() {
+      if (!autoToggleInterval) {
+        autoToggleInterval = setInterval(toggleLight, 1000); // toggle every second
+      }
+    }
+
+    function stopAuto() {
+      clearInterval(autoToggleInterval);
+      autoToggleInterval = null;
+    }
+  </script>
+
+</body>
+</html>
